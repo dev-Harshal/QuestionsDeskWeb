@@ -1,0 +1,98 @@
+{% extends "users/hod/hod_base_site.html" %}
+
+{% block title %} List {{role}} {% endblock title %}
+
+{% block main %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>List {{role}}</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url "hod-index-view" %}">Home</a></li>
+          <li class="breadcrumb-item active">List {{role}}</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">List {{role}} Profiles</h5>
+              {% include "users/components/alert.html" %}
+              <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>
+                      <b>F</b>ull Name
+                    </th>
+                    <th>Institute</th>
+                    <th>Email</th>
+                    {% if role != "Student" %}
+                      <th>Phone Number</th>
+                      <th>Department</th>
+                      <th>Subject</th>
+                    {% endif %}
+                    <th>Role</th>
+                    <th data-type="date" data-format="YYYY/DD/MM">Joined Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %}
+                    <tr>
+                      <td>{{user.id}}</td>
+                      <td>{{user.first_name}} {{user.last_name}}</td>
+                      <td>{{user.institute}}</td>
+                      <td>{{user.email}}</td>
+                      {% if role != "Student" %}
+                        <td>{{user.profile.phone_number}}</td>
+                        <td>{{user.profile.department}}</td>
+                        <td>
+                          {% for obj in user.profile.subjects.all %}
+                            {{obj.name}}
+                          {% endfor %}
+                        </td>
+                      {% endif %}
+                      <td>{{user.role}}</td>
+                      <td>{{user.joined_date}}</td>
+                      <td>
+                        {% if role == 'Teacher' %}
+                          <a href="{% url "update-teacher-view" user.id %}" class="btn btn-primary"><i class="bi bi-pen"></i></a>
+                        {% endif %}
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="verticalycentered" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Confirm Delete</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Are sure you want to delete ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url "delete-user-view" user.id %}" class="btn btn-danger">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</main><!-- End #main -->
+{% endblock main %}

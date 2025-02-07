@@ -1,0 +1,25 @@
+{% extends "base_site.html" %}
+
+{% block aside %}
+
+<ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " href="">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-heading">Pages</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url "teacher-list-user-view" 'Student' %}">
+        <i class="bi bi-list-task"></i>
+        <span>LIST STUDENT'S</span>
+      </a>
+    </li>
+
+  </ul>
+
+{% endblock aside %}
