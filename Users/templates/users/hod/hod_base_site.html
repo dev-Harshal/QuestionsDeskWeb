@@ -1,46 +1,57 @@
-{% extends "base_site.html" %}
+{% extends "staff_site.html" %}
 
 {% block aside %}
 
-<ul class="sidebar-nav" id="sidebar-nav">
+    <ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link " href="{% url "hod-index-view" %}">
-        <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
+        <li class="nav-item text-center">
+            <span class="badge text-bg-info w-100 fs-6 p-2">HOD PANEL</span>
+        </li>
 
-    <li class="nav-heading">Pages</li>
+        <li class="nav-item">
+            <a class="nav-link " href="{% url "hod-index-view" %}">
+                <i class="bi bi-grid"></i>
+                <span>DASHBOARD</span>
+            </a>
+        </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "add-subject-view" %}">
-        <i class="bi bi-plus"></i>
-        <span>ADD SUBJECTS</span>
-      </a>
-    </li>
+        <li class="nav-heading">Pages</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "add-teacher-view" %}">
-        <i class="bi bi-person-add"></i>
-        <span>ADD TEACHER</span>
-      </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "hod-create-subject-view" %}">
+                <i class="bi bi-plus"></i>
+                <span>CREATE SUBJECT</span>
+            </a>
+        </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "hod-list-user-view" 'Teacher' %}">
-        <i class="bi bi-list-task"></i>
-        <span>LIST TEACHER'S</span>
-      </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "hod-list-subject-view" %}">
+                <i class="bi bi-list-task"></i>
+                <span>LIST SUBJECT'S</span>
+            </a>
+        </li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "hod-list-user-view" 'Student' %}">
-        <i class="bi bi-list-task"></i>
-        <span>LIST STUDENT'S</span>
-      </a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "hod-create-teacher-view" %}">
+                <i class="bi bi-person-add"></i>
+                <span>CREATE TEACHER</span>
+            </a>
+        </li>
 
-  </ul>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "hod-list-user-view" 'teacher' %}">
+                <i class="bi bi-list-task"></i>
+                <span>LIST TEACHER'S</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{% url "hod-list-user-view" 'student' %}">
+                <i class="bi bi-list-task"></i>
+                <span>LIST STUDENT'S</span>
+            </a>
+        </li>
+
+    </ul>
 
 {% endblock aside %}

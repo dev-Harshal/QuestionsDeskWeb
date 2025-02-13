@@ -9,6 +9,9 @@ class UserManager(BaseUserManager):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using = self._db)
+        if user.role == 'Admin':
+            phone_number = input('Phone Number: ')
+            StaffProfile.objects.create(user=user, phone_number=phone_number, department='Admin', designation='Staff')
         return user
     
     def create_superuser(self, email, password=None, **extra_fields):
@@ -51,7 +54,8 @@ class StaffProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile' ,on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=10, null=False, blank=False)
     department = models.CharField(max_length=100, null=False, blank=False)
-    experience = models.CharField(max_length=10, null=False, blank=False)
+    designation = models.CharField(max_length=20, null=False, blank=False)
+    experience = models.CharField(max_length=10, null=True, blank=True)
     subjects = models.ManyToManyField(Subject, blank=True, related_name='subject')
 
     class Meta:

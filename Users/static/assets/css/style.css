@@ -1234,7 +1234,7 @@ h6 {
 
 /* ____________________________________ */
 
-main.authenticate > .container-fluid {
+main.authenticate {
   background-image: url('../img/auth.jpg');
   background-size: 100%;
   background-repeat: no-repeat;

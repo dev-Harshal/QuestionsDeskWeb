@@ -22,6 +22,8 @@ function popAlert(data) {
     },200)
 }
 
+// -- USERS FORMS --
+
 const registerForm = document.getElementById('registerForm')
 if (registerForm) {
     registerForm.addEventListener('submit', function(event) {
@@ -72,13 +74,15 @@ if (loginForm) {
     })
 }
 
+// -- STAFF FORMS --
+
 const staffLoginForm = document.getElementById('staffLoginForm')
 if (staffLoginForm) {
     staffLoginForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(staffLoginForm)
         const role = document.getElementById('role').value
-        url = `/staff/login/${role}/`
+        url = `/${role}/login/`
         fetch(url, {
             method : 'POST',
             headers : {
@@ -98,12 +102,64 @@ if (staffLoginForm) {
     })
 }
 
+const staffProfileForm = document.getElementById('staffProfileForm')
+if (staffProfileForm) {
+    staffProfileForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(staffProfileForm)
+        const role = document.getElementById('role').value
+        url = `/${role}/profile/`
+        fetch(url, {
+            method : 'POST',
+            headers : {
+                'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body : formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                popAlert(data)
+            }
+            else {
+                popAlert(data)
+            }
+        })
+    })
+}
+
+const changePasswordForm = document.getElementById('changePasswordForm')
+if (changePasswordForm) {
+    changePasswordForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(changePasswordForm)
+        fetch('/change-password/', {
+            method : 'POST',
+            headers : {
+                'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body : formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                popAlert(data)
+            }
+            else {
+                popAlert(data)
+            }
+        })
+    })
+}
+
+// -- ADMIN FORMS --
+
 const addHodForm = document.getElementById('addHodForm')
 if (addHodForm) {
     addHodForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(addHodForm)
-        fetch('/admin/add/hod/', {
+        fetch('/admin/create/hod/', {
             method : 'POST',
             headers : {
                 'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
@@ -149,12 +205,68 @@ if (updateHodForm) {
     })
 }
 
+// -- HOD FORMS --
+
+const addSubjectForm = document.getElementById('addSubjectForm')
+if (addSubjectForm) {
+    addSubjectForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(addSubjectForm)
+        fetch('/hod/create/subject/', {
+            method : 'POST',
+            headers : {
+                'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body : formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                window.location.href = data.success_url
+            }
+            else {
+                popAlert(data)
+            }
+        })
+    })
+}
+
+const updateSubjectForm = document.getElementById('updateSubjectForm')
+if (updateSubjectForm) {
+    updateSubjectForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(updateSubjectForm)
+        const id = document.getElementById('id').value
+        url = `/hod/update/subject/${id}/`
+        
+        fetch(url, {
+            method : 'POST',
+            headers : {
+                'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
+            },
+            body : formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                window.location.href = data.success_url
+            }
+            else {
+                popAlert(data)
+            }
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    })
+}
+
 const addTeacherForm = document.getElementById('addTeacherForm')
 if (addTeacherForm) {
     addTeacherForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(addTeacherForm)
-        fetch('/hod/add/teacher/', {
+        fetch('/hod/create/teacher/', {
             method : 'POST',
             headers : {
                 'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
@@ -192,6 +304,7 @@ if (updateTeacherForm) {
         .then(data => {
             if (data.status === 'success') {
                 window.location.href = data.success_url
+                popAlert(data)
             }
             else {
                 popAlert(data)
@@ -200,26 +313,3 @@ if (updateTeacherForm) {
     })
 }
 
-const addSubjectForm = document.getElementById('addSubjectForm')
-if (addSubjectForm) {
-    addSubjectForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formData = new FormData(addSubjectForm)
-        fetch('/hod/add/subject/', {
-            method : 'POST',
-            headers : {
-                'X-CSRFToken':document.querySelector('input[name="csrfmiddlewaretoken"]').value
-            },
-            body : formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                window.location.href = data.success_url
-            }
-            else {
-                popAlert(data)
-            }
-        })
-    })
-}

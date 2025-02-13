@@ -1,45 +1,50 @@
-{% extends "base_site.html" %}
+{% extends "staff_site.html" %}
 
 {% block aside %}
     
-<ul class="sidebar-nav" id="sidebar-nav">
+	<ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link " href="{% url "admin-index-view" %}">
-        <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
+		<li class="nav-item text-center">
+			<span class="badge text-bg-info w-100 fs-6 p-2">ADMIN PANEL</span>
+		</li>
 
-    <li class="nav-heading">Pages</li>
+		<li class="nav-item">
+			<a class="nav-link " href="{% url "admin-index-view" %}">
+				<i class="bi bi-grid"></i>
+				<span>DASHBOARD</span>
+			</a>
+		</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "add-hod-view" %}">
-        <i class="bi bi-person-add"></i>
-        <span>ADD HOD</span>
-      </a>
-    </li>
+		<li class="nav-heading">Pages</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "admin-list-user-view" 'HOD' %}">
-        <i class="bi bi-list-task"></i>
-        <span>LIST HOD'S</span>
-      </a>
-    </li>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="{% url "admin-create-hod-view" %}">
+				<i class="bi bi-person-add"></i>
+				<span>CREATE HOD</span>
+			</a>
+		</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "admin-list-user-view" 'Teacher' %}">
-        <i class="bi bi-list-task"></i>
-        <span>LIST TEACHER'S</span>
-      </a>
-    </li>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="{% url "admin-list-user-view" 'hod' %}">
+				<i class="bi bi-list-task"></i>
+				<span>LIST HOD'S</span>
+			</a>
+		</li>
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="{% url "admin-list-user-view" 'Student' %}">
-        <i class="bi bi-list-task"></i>
-        <span>LIST STUDENT'S</span>
-      </a>
-    </li>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="{% url "admin-list-user-view" 'teacher' %}">
+				<i class="bi bi-list-task"></i>
+				<span>LIST TEACHER'S</span>
+			</a>
+		</li>
 
-  </ul>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="{% url "admin-list-user-view" 'student' %}">
+				<i class="bi bi-list-task"></i>
+				<span>LIST STUDENT'S</span>
+			</a>
+		</li>
+
+	</ul>
+	
 {% endblock aside %}
