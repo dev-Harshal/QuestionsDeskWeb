@@ -22,6 +22,13 @@ function popAlert(data) {
     },200)
 }
 
+alertBox = document.getElementById('alert')
+if (alertBox) {
+    setTimeout(function() {
+        alertBox.style.display = 'none';
+    }, 5000);
+}
+
 // -- USERS FORMS --
 
 const registerForm = document.getElementById('registerForm')
